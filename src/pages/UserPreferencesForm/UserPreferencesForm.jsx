@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { suggestCities } from '../../services/api';
+// Import the updated service function
+import { generatePlaces } from '../../services/api';
 import './UserPreferencesForm.css';
 import Navbar from '../../components/Navbar/Navbar';
 import { motion } from 'framer-motion';
@@ -8,7 +9,6 @@ import { motion } from 'framer-motion';
 const UserPreferencesForm = () => {
     const [formData, setFormData] = useState({
         travel_type: 'Adventure',
-        // Updated state for budget range
         min_budget: '15000',
         max_budget: '50000',
         duration: '7',
@@ -30,10 +30,8 @@ const UserPreferencesForm = () => {
         setLoading(true);
         setError('');
 
-        // Construct the payload to match the backend model
         const payload = {
             travel_type: formData.travel_type,
-            // Create the tuple for the backend
             budget_range: [parseInt(formData.min_budget), parseInt(formData.max_budget)],
             duration: parseInt(formData.duration),
             no_of_people: parseInt(formData.no_of_people),
@@ -42,10 +40,18 @@ const UserPreferencesForm = () => {
         };
 
         try {
-            const response = await suggestCities(payload);
-            if (response.data && response.data.length > 0) {
-                 // Pass suggestions and the original form state (for re-use)
-                navigate('/select-city', { state: { suggestions: response.data, userPreferences: payload } });
+            // Use the new service function
+            const response = await generatePlaces(payload);
+
+            // *CRITICAL CHANGE HERE*
+            // Access the 'places' array from the response data
+            if (response.data && response.data.places && response.data.places.length > 0) {
+                navigate('/select-city', { 
+                    state: { 
+                        suggestions: response.data.places, // Pass the correct array
+                        userPreferences: payload 
+                    } 
+                });
             } else {
                 setError('No suggestions found. Please try different preferences.');
             }
@@ -57,6 +63,8 @@ const UserPreferencesForm = () => {
         }
     };
 
+    // The JSX remains the same as the last version, no changes needed there.
+    // ... copy the return (...) part from the previous response ...
     return (
         <>
             <Navbar />

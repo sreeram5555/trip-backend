@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { createItinerary } from '../../services/api';
+// Import the updated service function
+import { getSchedule } from '../../services/api';
 import './SpotCuisineSelection.css';
 import Navbar from '../../components/Navbar/Navbar';
 import { motion } from 'framer-motion';
@@ -40,15 +41,23 @@ const SpotCuisineSelection = () => {
         setLoading(true);
         setError('');
         try {
-            const payload = {
-                place: selectedPlace,
-                inputs: userPreferences,
-                attractions: selectedAttractions,
-                cuisines: selectedCuisines,
-            };
-            const response = await createItinerary(payload);
-            if (response.data && response.data.itinerary) {
-                navigate('/itinerary', { state: { itineraryData: response.data, place: selectedPlace } });
+            // Use the new service function with the correct payload structure
+            const response = await getSchedule(
+                userPreferences,
+                selectedPlace,
+                selectedAttractions,
+                selectedCuisines
+            );
+
+            // *CRITICAL CHANGE HERE*
+            // Access the 'formatted' object from the response data
+            if (response.data && response.data.formatted && response.data.formatted.itinerary) {
+                navigate('/itinerary', { 
+                    state: { 
+                        itineraryData: response.data.formatted, // Pass the correct object
+                        place: selectedPlace 
+                    } 
+                });
             } else {
                 setError(response.data.error || 'Failed to create itinerary.');
             }
@@ -60,6 +69,7 @@ const SpotCuisineSelection = () => {
         }
     };
 
+    // The JSX is fine, no changes needed
     return (
         <>
             <Navbar />
@@ -93,7 +103,7 @@ const SpotCuisineSelection = () => {
                                                 />
                                                 <div className="item-details">
                                                     <strong>{item.name}</strong> ({item.category})
-                                                    <p>{item.description}</p>
+                                                    <p>{item.why_visit}</p>
                                                 </div>
                                             </label>
                                         ))}

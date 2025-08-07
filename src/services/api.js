@@ -1,29 +1,45 @@
 import axios from 'axios';
 
-// The URL of your Python Flask backend
-const API_URL = 'http://127.0.0.1:8000/api';
+// The URL of your Python FastAPI backend
+const API_URL = 'http://127.0.0.1:8000';
 
 /**
- * @param {object} preferences User's travel preferences.
- * @returns {Promise} A promise that resolves with city suggestions.
+ * 1. Generate Place Suggestions
+ * @param {object} preferences The user's complete preference object.
+ * @returns {Promise} A promise that resolves with place suggestions.
  */
-export const suggestCities = (preferences) => {
-  return axios.post(`${API_URL}/suggest-cities`, preferences);
+export const generatePlaces = (preferences) => {
+  // Endpoint: /generate
+  return axios.post(`${API_URL}/generate`, preferences);
 };
 
 /**
- * @param {string} place The selected city.
- * @param {object} inputs The original user preferences.
- * @returns {Promise} A promise that resolves with city details (attractions, cuisine).
+ * 2. Get Local Info (Attractions & Cuisines)
+ * @param {object} preferences The original user preferences.
+ * @param {string} selected_place The city the user chose.
+ * @returns {Promise} A promise that resolves with city details.
  */
-export const getCityDetails = (place, inputs) => {
-  return axios.post(`${API_URL}/city-details`, { place, inputs });
+export const getLocalInfo = (preferences, selected_place) => {
+  // Endpoint: /local-info
+  // Payload must be an object with 'preferences' and 'selected_place' keys.
+  return axios.post(`${API_URL}/local-info`, {
+    preferences,
+    selected_place,
+  });
 };
 
 /**
+ * 3. Get the Final Trip Schedule
  * @param {object} data The final selections for the itinerary.
  * @returns {Promise} A promise that resolves with the generated itinerary.
  */
-export const createItinerary = (data) => {
-  return axios.post(`${API_URL}/create-itinerary`, data);
+export const getSchedule = (preferences, selected_place, selected_attractions, selected_cuisines) => {
+  // Endpoint: /schedule-trip (Note: your reference had a typo, I've corrected it here)
+  // Payload must contain all required keys.
+  return axios.post(`${API_URL}/schedule-trip`, {
+    preferences,
+    selected_place,
+    selected_attractions,
+    selected_cuisines,
+  });
 };

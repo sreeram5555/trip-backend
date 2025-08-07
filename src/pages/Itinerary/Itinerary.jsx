@@ -4,44 +4,104 @@ import './Itinerary.css';
 import Navbar from '../../components/Navbar/Navbar';
 import { motion } from 'framer-motion';
 
+// Define icons for a better visual experience
+const icons = {
+    travel: '🚗',
+    spot: '📍',
+    break: '☕',
+    accommodation: '🏨',
+    restaurant: '🍴',
+    cuisine: '🍲',
+};
+
+// This is the upgraded Step Renderer, based on your reference component
+const StepRenderer = ({ step }) => {
+    switch (step.type) {
+        case 'travel':
+            return (
+                <div className="step-content">
+                    <strong>Travel from {step.from} to {step.to}</strong>
+                    <p className="step-time">Time: {step.options[0].depart_time} - {step.options[0].arrival_time}</p>
+                    <div className="options-container">
+                        {step.options.map((opt, i) => (
+                            <span key={i} className="option-tag">
+                                {opt.mode} ({opt.time}, ~{opt.cost})
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            );
+        case 'spot':
+            return (
+                <div className="step-content">
+                    <strong>Visit: {step.name}</strong>
+                    <p className="step-time">Time: {step.arrival_time} - {step.depart_time}</p>
+                    <p className="step-reason"><em>"{step.reason}"</em></p>
+                </div>
+            );
+        case 'break':
+            return (
+                <div className="step-content">
+                    <strong>Break: {step.activity}</strong>
+                    <p className="step-time">Time: {step.arrival_time} - {step.depart_time} ({step.duration})</p>
+                </div>
+            );
+        case 'cuisine':
+             return (
+                <div className="step-content">
+                    <strong>Local Dish: {step.dish}</strong>
+                    <p>Origin: {step.origin} | Recommended for: {step.time_to_consume}</p>
+                </div>
+            );
+        case 'accommodation':
+            return (
+                <div className="step-content">
+                    <strong>Check-in to your Accommodation</strong>
+                     <p className="step-time">Arrival Time: {step.options[0].arrival_time}</p>
+                     <div className="options-container">
+                        <strong>Suggestions:</strong>
+                        <ul className="options-list">
+                            {step.options.map((opt, i) => (
+                                <li key={i}>{opt.name} - {opt.price_range}, {opt.rating} ⭐</li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            );
+        case 'restaurant':
+            return (
+                 <div className="step-content">
+                    <strong>Dine at: {step.options[0].name}</strong>
+                     <p className="step-time">Time: {step.options[0].arrival_time} - {step.options[0].depart_time}</p>
+                     <div className="options-container">
+                         <strong>Cuisines: </strong>
+                         {step.options[0].cuisines_served.map((c, i) => <span key={i} className="option-tag">{c}</span>)}
+                    </div>
+                </div>
+            );
+        default:
+            return <p>Unknown step in itinerary.</p>;
+    }
+};
+
+
 const Itinerary = () => {
     const location = useLocation();
     const { itineraryData, place } = location.state || { itineraryData: null, place: "your destination" };
 
-    if (!itineraryData || !itineraryData.itinerary) {
+    if (!itineraryData || itineraryData.error || !itineraryData.itinerary) {
         return (
             <>
                 <Navbar />
                 <div className="page-container">
                     <h2 className="error-title">Itinerary Not Found</h2>
-                    <p>Something went wrong. Please start over.</p>
+                    <p>{itineraryData?.error || "Something went wrong. Please start over."}</p>
                     <Link to="/" className="home-button">Go to Homepage</Link>
                 </div>
             </>
         );
     }
     
-    // Helper to render different step types
-    const renderStep = (step, index) => {
-        switch(step.type) {
-            case 'spot':
-                return <div key={index} className="timeline-item spot"><strong>Visit:</strong> {step.name} ({step.visit_time})</div>;
-            case 'cuisine':
-                return <div key={index} className="timeline-item cuisine"><strong>Taste:</strong> {step.dish}</div>;
-            case 'restaurant':
-                return <div key={index} className="timeline-item restaurant"><strong>Dine at:</strong> {step.options[0].name}</div>;
-            case 'accommodation':
-                 return <div key={index} className="timeline-item accommodation"><strong>Check-in:</strong> {step.options[0].name}</div>;
-            case 'travel':
-                return <div key={index} className="timeline-item travel"><strong>Travel:</strong> From {step.from} to {step.to} ({step.options[0].mode})</div>;
-            case 'break':
-                 return <div key={index} className="timeline-item break"><strong>Break:</strong> {step.activity} ({step.duration})</div>;
-            default:
-                return null;
-        }
-    };
-
-
     return (
         <>
             <Navbar />
@@ -67,7 +127,10 @@ const Itinerary = () => {
                                 <h2 className="day-title">Day {day.day}</h2>
                                 <div className="timeline">
                                     {day.steps.map((step, stepIndex) => (
-                                        renderStep(step, stepIndex)
+                                        <div key={stepIndex} className={`timeline-item ${step.type}`}>
+                                            <div className="timeline-icon">{icons[step.type] || '•'}</div>
+                                            <StepRenderer step={step} />
+                                        </div>
                                     ))}
                                 </div>
                             </motion.div>

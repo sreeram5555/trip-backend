@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getCityDetails } from '../../services/api';
+// Import the updated service function
+import { getLocalInfo } from '../../services/api';
 import './CitySelection.css';
 import Navbar from '../../components/Navbar/Navbar';
 import { motion } from 'framer-motion';
@@ -9,19 +10,28 @@ const CitySelection = () => {
     const location = useLocation();
     const navigate = useNavigate();
     
-    // Safely access state
     const { suggestions, userPreferences } = location.state || { suggestions: [], userPreferences: null };
 
-    const [loadingCity, setLoadingCity] = useState(null); // Track which city is loading
+    const [loadingCity, setLoadingCity] = useState(null);
     const [error, setError] = useState('');
 
     const handleCitySelect = async (place) => {
         setLoadingCity(place);
         setError('');
         try {
-            const response = await getCityDetails(place, userPreferences);
-            if (response.data) {
-                navigate('/select-spots', { state: { cityDetails: response.data, selectedPlace: place, userPreferences } });
+            // Use the new service function with the correct payload structure
+            const response = await getLocalInfo(userPreferences, place);
+            
+            // *CRITICAL CHANGE HERE*
+            // Access the 'formatted' object from the response data
+            if (response.data && response.data.formatted) {
+                navigate('/select-spots', { 
+                    state: { 
+                        cityDetails: response.data.formatted, // Pass the correct object
+                        selectedPlace: place, 
+                        userPreferences 
+                    } 
+                });
             } else {
                  setError('Could not fetch details for this city. Please try another.');
             }
@@ -34,6 +44,7 @@ const CitySelection = () => {
     };
 
     if (!suggestions || suggestions.length === 0) {
+        // This part is fine, no changes needed
         return (
              <>
                 <Navbar />
@@ -46,6 +57,7 @@ const CitySelection = () => {
         )
     }
 
+    // JSX is fine, no changes needed
     return (
         <>
             <Navbar />
