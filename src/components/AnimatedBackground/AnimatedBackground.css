@@ -1,0 +1,36 @@
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Place it behind all other content */
+  overflow: hidden;
+  background-color: #0c0c0c;
+}
+
+.background-animation::before {
+  content: '';
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background-image: radial-gradient(
+    circle,
+    rgba(138, 43, 226, 0.4),
+    rgba(138, 43, 226, 0) 60%
+  );
+  border-radius: 50%;
+  animation: move-glow 25s infinite alternate ease-in-out;
+}
+
+@keyframes move-glow {
+  0% {
+    transform: translate(-30%, -30%);
+  }
+  50% {
+    transform: translate(60vw, 40vh) scale(1.5);
+  }
+  100% {
+    transform: translate(10%, 70%);
+  }
+}

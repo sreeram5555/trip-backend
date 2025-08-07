@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --primary-color: #ffffff;
+  --secondary-color: #b0b0b0;
+  --background-color: #0c0c0c;
+  --accent-color: #8a2be2; /* A vibrant purple for accents */
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  overflow-x: hidden;
+}
+
+.App {
+  min-height: 100vh;
+}

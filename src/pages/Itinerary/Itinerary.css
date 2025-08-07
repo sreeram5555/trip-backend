@@ -1,0 +1,102 @@
+.itinerary-container {
+    text-align: center;
+}
+
+.itinerary-wrapper {
+    width: 100%;
+    max-width: 900px;
+}
+
+.itinerary-title {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.itinerary-subtitle {
+    color: var(--secondary-color);
+    margin-bottom: 3rem;
+    font-size: 1.2rem;
+}
+
+.days-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    text-align: left;
+}
+
+.day-card {
+    background: var(--background-light);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+}
+
+.day-title {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.timeline {
+    position: relative;
+    padding-left: 30px;
+    border-left: 2px solid #444;
+}
+
+.timeline-item {
+    margin-bottom: 1rem;
+    position: relative;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -38px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    background-color: var(--background-color);
+}
+
+/* Color coding for different activities */
+.timeline-item.spot { background-color: rgba(0, 150, 255, 0.1); }
+.timeline-item.spot::before { background-color: rgb(0, 150, 255); }
+
+.timeline-item.cuisine,
+.timeline-item.restaurant { background-color: rgba(255, 165, 0, 0.1); }
+.timeline-item.cuisine::before,
+.timeline-item.restaurant::before { background-color: rgb(255, 165, 0); }
+
+.timeline-item.accommodation { background-color: rgba(50, 205, 50, 0.1); }
+.timeline-item.accommodation::before { background-color: rgb(50, 205, 50); }
+
+.timeline-item.travel { background-color: rgba(255, 20, 147, 0.1); }
+.timeline-item.travel::before { background-color: rgb(255, 20, 147); }
+
+.timeline-item.break { background-color: rgba(128, 128, 128, 0.1); }
+.timeline-item.break::before { background-color: rgb(128, 128, 128); }
+
+
+.home-button {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 2rem;
+    display: inline-block;
+}
+
+.error-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
