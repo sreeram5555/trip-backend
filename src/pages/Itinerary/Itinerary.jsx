@@ -2,9 +2,9 @@ import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import './Itinerary.css';
 import Navbar from '../../components/Navbar/Navbar';
+import GlowingStarsBackground from '../../components/GlowingStarsBackground/GlowingStarsBackground';
 import { motion } from 'framer-motion';
 
-// Define icons for a better visual experience
 const icons = {
     travel: '🚗',
     spot: '📍',
@@ -14,7 +14,6 @@ const icons = {
     cuisine: '🍲',
 };
 
-// This is the upgraded Step Renderer, based on your reference component
 const StepRenderer = ({ step }) => {
     switch (step.type) {
         case 'travel':
@@ -84,7 +83,6 @@ const StepRenderer = ({ step }) => {
     }
 };
 
-
 const Itinerary = () => {
     const location = useLocation();
     const { itineraryData, place } = location.state || { itineraryData: null, place: "your destination" };
@@ -93,10 +91,13 @@ const Itinerary = () => {
         return (
             <>
                 <Navbar />
-                <div className="page-container">
-                    <h2 className="error-title">Itinerary Not Found</h2>
-                    <p>{itineraryData?.error || "Something went wrong. Please start over."}</p>
-                    <Link to="/" className="home-button">Go to Homepage</Link>
+                <div className="page-container itinerary-container">
+                    <GlowingStarsBackground />
+                    <div className="content-wrapper">
+                        <h2 className="itinerary-title error-title">Itinerary Not Found</h2>
+                        <p className="selection-subtitle">{itineraryData?.error || "Something went wrong. Please start over."}</p>
+                        <Link to="/" className="form-submit-btn">Go to Homepage</Link>
+                    </div>
                 </div>
             </>
         );
@@ -106,6 +107,7 @@ const Itinerary = () => {
         <>
             <Navbar />
             <div className="page-container itinerary-container">
+                <GlowingStarsBackground />
                 <motion.div
                     className="itinerary-wrapper"
                     initial={{ opacity: 0 }}

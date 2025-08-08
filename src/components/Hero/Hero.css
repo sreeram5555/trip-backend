@@ -3,59 +3,64 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: 100vh;
-  padding: 0 2rem;
-  background: var(--background-color);
-  position: relative;
+  height: 100vh; /* Set height to full viewport height */
   overflow: hidden;
-}
-
-.hero-section::before {
-  content: '';
-  position: absolute;
+  
+  /* This combination makes the scroll effect work */
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(ellipse at center, rgba(138, 43, 226, 0.1), transparent 70%);
-  pointer-events: none;
+
+  /* Adjust padding to position content correctly */
+  padding: 5rem 2rem;
 }
 
 .hero-content {
-  z-index: 1;
+  /* This ensures text and buttons appear ON TOP of the Vanta canvas */
+  position: relative;
+  z-index: 1; 
+  max-width: 800px;
 }
 
 .hero-headline {
-  font-size: 4.5rem;
-  font-weight: 800;
+  font-size: 5rem;
+  font-weight: 700;
   line-height: 1.1;
   color: var(--primary-color);
-  margin-bottom: 1.5rem;
-  letter-spacing: -2px;
+  margin-bottom: 2rem;
+  letter-spacing: -2.5px;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
 }
 
 .hero-subheadline {
   font-size: 1.25rem;
   color: var(--secondary-color);
-  max-width: 650px;
-  margin: 0 auto 2.5rem;
-  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
 }
 
-.hero-cta {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #000;
-  background-color: var(--primary-color);
-  padding: 1rem 2.5rem;
-  border-radius: 12px;
-  text-decoration: none;
+.hero-cta-button {
   display: inline-block;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 20px rgba(138, 43, 226, 0.4);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--background-color);
+  background-color: var(--accent-color);
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(45, 212, 191, 0.4);
 }
 
-.hero-cta:hover {
+.hero-cta-button:hover {
   transform: scale(1.05) translateY(-5px);
-  box-shadow: 0 8px 30px rgba(138, 43, 226, 0.6);
+  box-shadow: 0 0 30px rgba(45, 212, 191, 0.6);
+  background-color: var(--accent-hover);
 }

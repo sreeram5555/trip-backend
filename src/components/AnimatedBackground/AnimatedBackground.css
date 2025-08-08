@@ -4,33 +4,49 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1; /* Place it behind all other content */
+  z-index: -1;
   overflow: hidden;
-  background-color: #0c0c0c;
+  background-color: var(--background-color);
+  filter: blur(100px); /* Softens the entire effect */
 }
 
-.background-animation::before {
+.background-animation::before,
+.background-animation::after {
   content: '';
   position: absolute;
-  width: 800px;
-  height: 800px;
-  background-image: radial-gradient(
-    circle,
-    rgba(138, 43, 226, 0.4),
-    rgba(138, 43, 226, 0) 60%
-  );
   border-radius: 50%;
-  animation: move-glow 25s infinite alternate ease-in-out;
 }
 
-@keyframes move-glow {
+/* Teal Glow */
+.background-animation::before {
+  width: 600px;
+  height: 600px;
+  background: var(--glow-color-1);
+  animation: move-glow-1 20s infinite alternate ease-in-out;
+}
+
+/* Purple Glow */
+.background-animation::after {
+  width: 500px;
+  height: 500px;
+  background: var(--glow-color-2);
+  animation: move-glow-2 25s infinite alternate ease-in-out -5s; /* Offset animation */
+}
+
+@keyframes move-glow-1 {
   0% {
-    transform: translate(-30%, -30%);
-  }
-  50% {
-    transform: translate(60vw, 40vh) scale(1.5);
+    transform: translate(-50%, -50%);
   }
   100% {
-    transform: translate(10%, 70%);
+    transform: translate(100vw, 100vh);
+  }
+}
+
+@keyframes move-glow-2 {
+  0% {
+    transform: translate(50vw, 10vh);
+  }
+  100% {
+    transform: translate(0, 80vh);
   }
 }

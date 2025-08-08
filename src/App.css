@@ -1,15 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+/*
+  App.css - Global Styles and Color Palette
+  Inspired by the Tech Valley Dribbble design.
+*/
 
 :root {
-  --primary-color: #ffffff;
-  --secondary-color: #b0b0b0;
-  --background-color: #0c0c0c;
-  --accent-color: #8a2be2; /* A vibrant purple for accents */
+  --background-color: #020617; /* Deep navy blue */
+  --background-light: #0f172a; /* Lighter navy for cards */
+  --border-color: rgba(45, 212, 191, 0.2); /* Teal border with low opacity */
+  --primary-color: #f8fafc; /* Off-white for primary text */
+  --secondary-color: #94a3b8; /* Slate gray for secondary text */
+  --accent-color: #2dd4bf; /* Bright Teal for accents and buttons */
+  --accent-hover: #5eead4; /* Lighter teal for hover */
+  --glow-color-1: rgba(45, 212, 191, 0.5); /* Teal glow */
+  --glow-color-2: rgba(124, 58, 237, 0.4); /* Purple glow */
 }
 
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  /* Use the new font */
+  font-family: 'Satoshi', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--background-color);
@@ -19,4 +28,12 @@ body {
 
 .App {
   min-height: 100vh;
+  position: relative; /* Required for the animated background */
+}
+
+/* Helper class for section structure */
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }

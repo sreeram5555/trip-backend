@@ -1,16 +1,27 @@
 .form-page-container {
-    background: radial-gradient(ellipse at top, rgba(138, 43, 226, 0.1), transparent 60%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 120px 2rem 2rem; /* Add padding to avoid navbar overlap */
+    position: relative; /* This is crucial for positioning the background */
+    overflow: hidden;   /* This is crucial to contain the background effects */
 }
 
 .form-wrapper {
-  background: var(--background-light);
-  padding: 2rem 3rem 3rem;
-  border-radius: 20px;
-  border: 1px solid var(--border-color);
-  width: 100%;
-  max-width: 700px;
-  text-align: center;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    /* Glassmorphism Effect */
+    background: rgba(15, 23, 42, 0.75); /* Semi-transparent background */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /* For Safari */
+    z-index: 1; /* Ensures the form is on top of the background */
+
+    padding: 3rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
 .form-title {
@@ -56,13 +67,13 @@
 
 .form-group input,
 .form-group select {
-  background: #101010;
-  border: 1px solid #444;
+  background: #020617; /* Matches the page background for a seamless look */
+  border: 1px solid var(--border-color);
   color: var(--primary-color);
   padding: 14px;
   border-radius: 8px;
   font-size: 1rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Satoshi', sans-serif;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
@@ -70,21 +81,21 @@
 .form-group select:focus {
     outline: none;
     border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.3);
+    box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.3);
 }
 
 .form-submit-btn {
-  background: var(--accent-color);
-  color: var(--primary-color);
+  background-color: var(--accent-color);
+  color: var(--background-color);
   border: none;
   padding: 1rem;
   border-radius: 8px;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   margin-top: 1rem;
   width: 100%;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: all 0.3s ease;
 }
 
 .form-submit-btn:disabled {
@@ -112,4 +123,11 @@
     gap: 1rem;
     padding: 4rem 0;
     color: var(--secondary-color);
+}
+
+/* Responsive grid for smaller screens */
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
 }
