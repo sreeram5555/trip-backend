@@ -11,7 +11,7 @@ import {
     IconUsersGroup,
 } from "@tabler/icons-react";
 
-// New data tailored to our app
+// Data for the feature cards remains the same.
 const features = [
     {
         title: "AI-Powered Discovery",
@@ -58,10 +58,8 @@ const features = [
 const Feature = ({ title, description, icon, index }) => {
     return (
         <div className={`feature-item item-${index}`}>
-            {/* The gradient overlays for hover effect */}
             {index < 4 && <div className="gradient-overlay-top" />}
             {index >= 4 && <div className="gradient-overlay-bottom" />}
-            
             <div className="feature-icon">{icon}</div>
             <div className="feature-title-container">
                 <div className="title-bar" />
@@ -74,11 +72,16 @@ const Feature = ({ title, description, icon, index }) => {
 
 const Features = () => {
     return (
-        <div className="features-section-new">
-            {features.map((feature, index) => (
-                <Feature key={feature.title} {...feature} index={index} />
-            ))}
-        </div>
+        // --- THIS IS THE STRUCTURAL FIX ---
+        // 1. The outer section is full-width and provides padding.
+        <section className="features-section-container">
+            {/* 2. The inner div is the centered grid with the border. */}
+            <div className="features-grid-wrapper">
+                {features.map((feature, index) => (
+                    <Feature key={feature.title} {...feature} index={index} />
+                ))}
+            </div>
+        </section>
     );
 };
 

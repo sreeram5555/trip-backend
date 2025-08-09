@@ -1,33 +1,46 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-// Import the updated service function
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { getLocalInfo } from '../../services/api';
 import './CitySelection.css';
 import Navbar from '../../components/Navbar/Navbar';
+import GlowingStarsBackground from '../../components/GlowingStarsBackground/GlowingStarsBackground';
 import { motion } from 'framer-motion';
 
 const CitySelection = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    
-    const { suggestions, userPreferences } = location.state || { suggestions: [], userPreferences: null };
-
     const [loadingCity, setLoadingCity] = useState(null);
     const [error, setError] = useState('');
+
+    if (!location.state || !location.state.suggestions || !location.state.userPreferences) {
+        return (
+            <>
+                <Navbar />
+                <div className="page-container selection-page-container">
+                    <GlowingStarsBackground />
+                    <div className="content-wrapper">
+                        <h2 className="selection-title">Oops! Something went wrong.</h2>
+                        <p className="selection-subtitle">We don't have your preferences. Please start again.</p>
+                        <Link to="/book-a-trip" className="form-submit-btn" style={{textDecoration: 'none', display: 'inline-block'}}>
+                            Go Back to Form
+                        </Link>
+                    </div>
+                </div>
+            </>
+        );
+    }
+    
+    const { suggestions, userPreferences } = location.state;
 
     const handleCitySelect = async (place) => {
         setLoadingCity(place);
         setError('');
         try {
-            // Use the new service function with the correct payload structure
             const response = await getLocalInfo(userPreferences, place);
-            
-            // CRITICAL CHANGE HERE
-            // Access the 'formatted' object from the response data
             if (response.data && response.data.formatted) {
                 navigate('/select-spots', { 
                     state: { 
-                        cityDetails: response.data.formatted, // Pass the correct object
+                        cityDetails: response.data.formatted,
                         selectedPlace: place, 
                         userPreferences 
                     } 
@@ -37,60 +50,58 @@ const CitySelection = () => {
             }
         } catch (err) {
             setError('An error occurred while fetching city details. Please try again.');
-            console.error('Error fetching city details:', err);
         } finally {
             setLoadingCity(null);
         }
     };
 
-    if (!suggestions || suggestions.length === 0) {
-        // This part is fine, no changes needed
-        return (
-             <>
-                <Navbar />
-                <div className="page-container">
-                    <h2>No Suggestions Found</h2>
-                    <p>Please go back and try different preferences.</p>
-                    <button onClick={() => navigate('/book-a-trip')} className="back-button">Go Back</button>
-                </div>
-            </>
-        )
-    }
-
-    // JSX is fine, no changes needed
     return (
         <>
             <Navbar />
             <div className="page-container selection-page-container">
+                <GlowingStarsBackground />
                 <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
+                    className="content-wrapper"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
                 >
                     <h1 className="selection-title">Here are your personalized suggestions</h1>
                     <p className="selection-subtitle">Based on your preferences, we think you'll love one of these places.</p>
-                    <div className="city-cards-grid">
-                        {suggestions.map((city, index) => (
-                            <motion.div
-                                key={index}
-                                className="city-card"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.4, delay: index * 0.1 }}
-                            >
-                                <div className="card-content">
-                                    <h3 className="card-title">{city.place}</h3>
-                                    <p className="card-reason">{city.reason}</p>
-                                </div>
-                                <button
-                                    onClick={() => handleCitySelect(city.place)}
-                                    className="select-button"
-                                    disabled={loadingCity !== null}
+                    
+                    <div className="city-list-container">
+                        {suggestions.map((city, index) => {
+                            const hasPhotos = city.photos && city.photos.length > 0;
+                            return (
+                                <motion.div
+                                    key={city.place}
+                                    className="city-item"
+                                    initial={{ opacity: 0, y: 50 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: index * 0.15 }}
                                 >
-                                    {loadingCity === city.place ? 'Loading...' : 'Explore this City'}
-                                </button>
-                            </motion.div>
-                        ))}
+                                    <div className="item-details">
+                                        <h2 className="item-title">{city.place}</h2>
+                                        <p className="item-reason">{city.reason}</p>
+                                        <button
+                                            onClick={() => handleCitySelect(city.place)}
+                                            className="select-button"
+                                            disabled={loadingCity !== null}
+                                        >
+                                            {loadingCity === city.place ? 'Loading...' : 'Explore this City'}
+                                        </button>
+                                    </div>
+                                    {hasPhotos && (
+                                        <div className="item-photos">
+                                            {city.photos.slice(0, 3).map((photoUrl, photoIndex) => (
+                                                <div className="photo-container" key={photoIndex}>
+                                                    <img src={photoUrl} alt={`${city.place} view ${photoIndex + 1}`} />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </motion.div>
+                            )
+                        })}
                     </div>
                     {error && <p className="error-message">{error}</p>}
                 </motion.div>

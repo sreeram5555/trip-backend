@@ -1,4 +1,17 @@
 .selection-page-container {
+    padding: 120px 2rem 4rem; /* Added more padding top and bottom */
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content-wrapper {
+    z-index: 1;
+    width: 100%;
+    max-width: 900px; /* Wider container for a better look */
     text-align: center;
 }
 
@@ -6,65 +19,84 @@
     font-size: 2.8rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
+    color: var(--primary-color);
 }
 
 .selection-subtitle {
     color: var(--secondary-color);
-    margin-bottom: 3rem;
+    margin-bottom: 4rem; /* More space below subtitle */
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.city-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    width: 100%;
-    max-width: 1200px;
-}
-
-.city-card {
-    background: var(--background-light);
-    border-radius: 16px;
-    border: 1px solid var(--border-color);
-    padding: 2rem;
+/* --- NEW VERTICAL LIST STYLES --- */
+.city-list-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 3rem; /* More space between city items */
+    width: 100%;
+}
+
+.city-item {
+    background: rgba(15, 23, 42, 0.75); /* Glassmorphism effect */
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile first: stack details and photos */
+    gap: 1.5rem;
+    padding: 2rem;
     text-align: left;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease;
 }
 
-.city-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(138, 43, 226, 0.2);
+@media (min-width: 768px) {
+    .city-item {
+        grid-template-columns: repeat(2, 1fr); /* Side-by-side on larger screens */
+        align-items: center;
+    }
 }
 
-.card-title {
-    font-size: 1.8rem;
+.city-item:hover {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-title {
+    font-size: 2.5rem;
+    font-weight: 700;
     margin-bottom: 1rem;
     color: var(--primary-color);
 }
 
-.card-reason {
+.item-reason {
     color: var(--secondary-color);
-    line-height: 1.6;
-    flex-grow: 1; /* Pushes the button to the bottom */
+    line-height: 1.7;
     margin-bottom: 2rem;
+    flex-grow: 1;
 }
 
 .select-button {
-    background: var(--primary-color);
-    color: #000;
+    background-color: var(--accent-color);
+    color: #020617;
     border: none;
-    padding: 1rem;
-    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s;
+    width: fit-content; /* Button is only as wide as its content */
+    transition: all 0.3s ease;
+}
+
+.select-button:hover:not(:disabled) {
+    background-color: var(--accent-hover);
+    transform: scale(1.05);
 }
 
 .select-button:disabled {
@@ -72,17 +104,39 @@
     cursor: not-allowed;
 }
 
-.select-button:hover:not(:disabled) {
-    background-color: #ddd;
+.item-photos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    height: 150px; /* Fixed height for the photo area */
 }
 
-.back-button {
-    background-color: var(--accent-color);
-    color: var(--primary-color);
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    margin-top: 2rem;
+@media (min-width: 768px) {
+    .item-photos {
+        height: 250px; /* Taller on larger screens */
+    }
+}
+
+.photo-container {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.photo-container:hover {
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+.photo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.error-message {
+  color: #ff4d4d;
+  margin-top: 1rem;
+  font-weight: 500;
+  z-index: 2;
 }

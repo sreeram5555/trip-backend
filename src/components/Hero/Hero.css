@@ -3,19 +3,22 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  height: 100vh; /* Set height to full viewport height */
+  /* width: 100vw; */
+  height: 100vh; /* This makes the section take up the full height of the viewport. */
   overflow: hidden;
   
-  /* This combination makes the scroll effect work */
+  /* This is the key property that makes the section "stick" to the top
+     of the page as the user scrolls past it. */
   position: sticky;
   top: 0;
 
-  /* Adjust padding to position content correctly */
+  /* This padding positions the text content vertically and horizontally. */
   padding: 5rem 2rem;
 }
 
 .hero-content {
-  /* This ensures text and buttons appear ON TOP of the Vanta canvas */
+  /* This ensures the text, subtitle, and button appear ON TOP of the
+     Vanta.js canvas that is injected into the .hero-section background. */
   position: relative;
   z-index: 1; 
   max-width: 800px;
