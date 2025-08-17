@@ -1,26 +1,41 @@
-/* New Features Section Styling */
-.features-section-new {
+/* 
+  This is the outer container for the entire section.
+  It is FULL-WIDTH and provides the vertical spacing.
+*/
+.features-section-container {
+    width: 100%;
+    padding: 6rem 2rem; /* Provides vertical spacing */
+    box-sizing: border-box;
+}
+
+/* 
+  This is the inner wrapper for the grid.
+  It has a MAX-WIDTH, is centered, has the border, and contains the grid layout.
+  This was the part causing the layout issue before.
+*/
+.features-grid-wrapper {
     display: grid;
     grid-template-columns: 1fr; /* Mobile first */
     position: relative;
     z-index: 10;
-    max-width: 7xl; /* approx 1280px */
+    max-width: 1280px;
     margin: 0 auto;
     border: 1px solid var(--border-color);
 }
 
 @media (min-width: 768px) { /* md breakpoint */
-    .features-section-new {
+    .features-grid-wrapper {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (min-width: 1024px) { /* lg breakpoint */
-    .features-section-new {
+    .features-grid-wrapper {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
+/* Styling for the individual feature items inside the grid */
 .feature-item {
     display: flex;
     flex-direction: column;
@@ -36,7 +51,7 @@
 
 .feature-item:hover .title-bar {
     height: 2rem;
-    background-color: #2dd4bf; /* Accent color */
+    background-color: var(--accent-color);
 }
 
 .feature-item:hover .feature-title {
@@ -121,7 +136,7 @@
 .feature-description {
     font-size: 0.875rem;
     color: var(--secondary-color);
-    max-width: 20rem; /* approx max-w-xs */
+    max-width: 20rem;
     position: relative;
     z-index: 10;
     padding: 0 2.5rem;
