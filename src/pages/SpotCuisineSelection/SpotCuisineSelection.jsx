@@ -142,15 +142,3 @@ const SpotCuisineSelection = () => {
 };
 
 export default SpotCuisineSelection;
-
-
-
-
-
-
-
-
-
-
-
-

@@ -15,6 +15,7 @@
     /* Ensures it sits on top of the sticky hero section */
     position: relative;
     z-index: 2;
+    width: 100%;
 
     /* Gives it an opaque background to hide the hero as it scrolls */
     background-color: var(--background-color);

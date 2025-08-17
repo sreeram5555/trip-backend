@@ -170,4 +170,3 @@ const UserPreferencesForm = () => {
 
 export default UserPreferencesForm;
 
-
