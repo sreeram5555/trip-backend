@@ -4,7 +4,7 @@
 */
 .features-section-container {
     width: 100%;
-    padding: 6rem 2rem; /* Provides vertical spacing */
+    /* padding: 2rem 2rem; Provides vertical spacing */
     box-sizing: border-box;
 }
 
@@ -18,7 +18,7 @@
     grid-template-columns: 1fr; /* Mobile first */
     position: relative;
     z-index: 10;
-    max-width: 1280px;
+    max-width: 12000px;
     margin: 0 auto;
     border: 1px solid var(--border-color);
 }
