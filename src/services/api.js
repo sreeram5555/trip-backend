@@ -1,45 +1,45 @@
 import axios from 'axios';
 
-// The URL of your Python FastAPI backend
-const API_URL = 'http://127.0.0.1:8000';
+const API_URL = 'http://127.0.0.1:8000'; // Your FastAPI backend URL
 
-/**
- * 1. Generate Place Suggestions
- * @param {object} preferences The user's complete preference object.
- * @returns {Promise} A promise that resolves with place suggestions.
- */
+// --- CORE WORKFLOW ---
 export const generatePlaces = (preferences) => {
-  // Endpoint: /generate
   return axios.post(`${API_URL}/generate`, preferences);
 };
 
-/**
- * 2. Get Local Info (Attractions & Cuisines)
- * @param {object} preferences The original user preferences.
- * @param {string} selected_place The city the user chose.
- * @returns {Promise} A promise that resolves with city details.
- */
 export const getLocalInfo = (preferences, selected_place) => {
-  // Endpoint: /local-info
-  // Payload must be an object with 'preferences' and 'selected_place' keys.
-  return axios.post(`${API_URL}/local-info`, {
-    preferences,
-    selected_place,
-  });
+  return axios.post(`${API_URL}/local-info`, { preferences, selected_place });
 };
 
-/**
- * 3. Get the Final Trip Schedule
- * @param {object} data The final selections for the itinerary.
- * @returns {Promise} A promise that resolves with the generated itinerary.
- */
 export const getSchedule = (preferences, selected_place, selected_attractions, selected_cuisines) => {
-  // Endpoint: /schedule-trip (Note: your reference had a typo, I've corrected it here)
-  // Payload must contain all required keys.
+  const attractionNames = selected_attractions.map(att => att.name);
+  const cuisineNames = selected_cuisines.map(cui => cui.dish);
   return axios.post(`${API_URL}/schedule-trip`, {
     preferences,
     selected_place,
-    selected_attractions,
-    selected_cuisines,
+    selected_attractions: attractionNames,
+    selected_cuisines: cuisineNames,
   });
+};
+
+// --- NEW ENHANCEMENT ENDPOINTS ---
+export const getSafetyInfo = (preferences, selected_place) => {
+  return axios.post(`${API_URL}/safety-info`, { preferences, selected_place });
+};
+
+export const getPackingList = (preferences, selected_place) => {
+  return axios.post(`${API_URL}/packing-list`, { preferences, selected_place });
+};
+
+export const getBudgetBreakdown = (preferences) => {
+  // This endpoint only needs preferences
+  return axios.post(`${API_URL}/budget-breakdown`, { preferences });
+};
+
+export const getTransportOptions = (preferences, selected_place) => {
+  return axios.post(`${API_URL}/transport-options`, { preferences, selected_place });
+};
+
+export const getAccommodationSuggestions = (preferences, selected_place) => {
+  return axios.post(`${API_URL}/accommodation-suggestions`, { preferences, selected_place });
 };
