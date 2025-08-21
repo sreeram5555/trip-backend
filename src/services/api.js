@@ -1,45 +1,58 @@
 import axios from 'axios';
 
-const API_URL = 'http://127.0.0.1:8000'; // Your FastAPI backend URL
+// --- Axios Instance for the Node.js Auth/Data Backend (Port 5000) ---
+const authApiClient = axios.create({
+    baseURL: 'http://localhost:5000/api',
+    withCredentials: true,
+});
 
-// --- CORE WORKFLOW ---
-export const generatePlaces = (preferences) => {
-  return axios.post(`${API_URL}/generate`, preferences);
+// --- Axios Instance for the Python ML Backend (Port 8000) ---
+const mlApiClient = axios.create({
+    baseURL: 'http://localhost:8000',
+});
+
+// ===================================================================
+// AUTH & DATA API (Node.js @ Port 5000)
+// ===================================================================
+// In src/services/api.js...
+
+// ===================================================================
+// AUTH & DATA API (Node.js @ Port 5000)
+// ===================================================================
+export const authApi = {
+    // Auth endpoints are unchanged
+    register: (userData) => authApiClient.post('/auth/register', userData),
+    verifyEmail: (data) => authApiClient.post('/auth/verify-email', data),
+    resendOtp: (data) => authApiClient.post('/auth/resend-otp', data),
+    login: (credentials) => authApiClient.post('/auth/login', credentials),
+    logout: () => authApiClient.post('/auth/logout'),
+    getMe: () => authApiClient.get('/auth/me'),
+
+    // --- NEW, SIMPLIFIED ADVENTURE ENDPOINTS ---
+    saveAdventure: (tripPlan) => authApiClient.post('/adventure/save', { tripPlan }),
+    getMyAdventures: () => authApiClient.get('/adventure/my'),
 };
 
-export const getLocalInfo = (preferences, selected_place) => {
-  return axios.post(`${API_URL}/local-info`, { preferences, selected_place });
-};
-
-export const getSchedule = (preferences, selected_place, selected_attractions, selected_cuisines) => {
-  const attractionNames = selected_attractions.map(att => att.name);
-  const cuisineNames = selected_cuisines.map(cui => cui.dish);
-  return axios.post(`${API_URL}/schedule-trip`, {
-    preferences,
-    selected_place,
-    selected_attractions: attractionNames,
-    selected_cuisines: cuisineNames,
-  });
-};
-
-// --- NEW ENHANCEMENT ENDPOINTS ---
-export const getSafetyInfo = (preferences, selected_place) => {
-  return axios.post(`${API_URL}/safety-info`, { preferences, selected_place });
-};
-
-export const getPackingList = (preferences, selected_place) => {
-  return axios.post(`${API_URL}/packing-list`, { preferences, selected_place });
-};
-
-export const getBudgetBreakdown = (preferences) => {
-  // This endpoint only needs preferences
-  return axios.post(`${API_URL}/budget-breakdown`, { preferences });
-};
-
-export const getTransportOptions = (preferences, selected_place) => {
-  return axios.post(`${API_URL}/transport-options`, { preferences, selected_place });
-};
-
-export const getAccommodationSuggestions = (preferences, selected_place) => {
-  return axios.post(`${API_URL}/accommodation-suggestions`, { preferences, selected_place });
+// ===================================================================
+// MACHINE LEARNING API (Python @ Port 8000)
+// ===================================================================
+export const mlApi = {
+    generatePlaces: (preferences) => mlApiClient.post('/generate', preferences),
+    getLocalInfo: (preferences, selected_place) => mlApiClient.post('/local-info', { preferences, selected_place }),
+    getSchedule: (preferences, selected_place, selected_attractions, selected_cuisines) => {
+        const attractionNames = selected_attractions.map(att => att.name);
+        const cuisineNames = selected_cuisines.map(cui => cui.dish);
+        return mlApiClient.post('/schedule-trip', {
+            preferences,
+            selected_place,
+            selected_attractions: attractionNames,
+            selected_cuisines: cuisineNames,
+        });
+    },
+    getSafetyInfo: (preferences, selected_place) => mlApiClient.post('/safety-info', { preferences, selected_place }),
+    getPackingList: (preferences, selected_place) => mlApiClient.post('/packing-list', { preferences, selected_place }),
+    getBudgetBreakdown: (preferences) => mlApiClient.post('/budget-breakdown', { preferences }),
+    getTransportOptions: (preferences, selected_place) => mlApiClient.post('/transport-options', { preferences, selected_place }),
+    getAccommodationSuggestions: (preferences, selected_place) => mlApiClient.post('/accommodation-suggestions', { preferences, selected_place }),
+    getReviews: (preferences, selected_place) => mlApiClient.post('/reviews', { preferences, selected_place }),
 };

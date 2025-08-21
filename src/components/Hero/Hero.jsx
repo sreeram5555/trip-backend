@@ -20,8 +20,8 @@ const Hero = () => {
         scaleMobile: 1.00,
         color: 0x2dd4bf,
         backgroundColor: 0x020617,
-        points: 6.00,      // The fine-tuned, subtle value
-        maxDistance: 16.00, // The fine-tuned, subtle value
+        points: 6.00,
+        maxDistance: 16.00,
         spacing: 20.00
       });
       setVantaEffect(effect);

@@ -6,7 +6,6 @@
   z-index: 1000;
   padding: 0 1rem;
 }
-
 .navbar-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -14,43 +13,31 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 1.5rem;
-  background: rgba(15, 23, 42, 0.7); /* Corresponds to var(--background-light) */
+  background: rgba(15, 23, 42, 0.7);
   backdrop-filter: blur(10px);
   border: 1px solid var(--border-color);
-  border-radius: 50px; /* Pill shape */
+  border-radius: 50px;
 }
-
 .navbar-logo {
-  display: flex;
-  align-items: center;
   text-decoration: none;
   color: var(--primary-color);
   font-weight: 500;
   font-size: 1.2rem;
 }
-
-.navbar-logo img {
-  height: 30px;
-  margin-right: 10px;
-  filter: invert(1) brightness(2); /* Makes the SVG white */
-}
-
 .navbar-links {
   display: flex;
   gap: 2.5rem;
 }
-
 .navbar-links a {
   color: var(--secondary-color);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
 }
-
-.navbar-links a:hover {
-  color: var(--primary-color);
-}
-
+.navbar-links a:hover { color: var(--primary-color); }
+.navbar-action { display: flex; align-items: center; gap: 1rem; }
+.nav-user-actions, .nav-guest-actions { display: flex; align-items: center; gap: 1.5rem; }
+.nav-profile-link, .nav-login-link { color: var(--secondary-color); text-decoration: none; font-weight: 500; }
 .cta-button {
   background-color: var(--accent-color);
   color: var(--background-color);
@@ -59,11 +46,12 @@
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s ease;
-  box-shadow: 0 0 15px rgba(45, 212, 191, 0.3);
 }
-
-.cta-button:hover {
-  background-color: var(--accent-hover);
-  box-shadow: 0 0 25px rgba(45, 212, 191, 0.5);
-  transform: scale(1.05);
+.cta-button-secondary {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
 }

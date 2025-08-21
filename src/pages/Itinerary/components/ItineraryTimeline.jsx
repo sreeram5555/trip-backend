@@ -20,7 +20,7 @@ const StepRenderer = ({ step }) => {
 const ItineraryTimeline = ({ itineraryData }) => {
     return (
         <div className="days-section">
-            {itineraryData.itinerary.map((day, dayIndex) => (
+            {(itineraryData.itinerary || []).map((day, dayIndex) => (
                 <motion.div
                     key={day.day}
                     className="day-card"

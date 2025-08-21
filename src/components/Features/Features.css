@@ -1,10 +1,6 @@
-/* 
-  This is the outer container for the entire section.
-  It is FULL-WIDTH and provides the vertical spacing.
-*/
 .features-section-container {
     width: 100%;
-    /* padding: 2rem 2rem; Provides vertical spacing */
+    padding: 6rem 2rem;
     box-sizing: border-box;
 }
 
@@ -18,8 +14,13 @@
     grid-template-columns: 1fr; /* Mobile first */
     position: relative;
     z-index: 10;
-    max-width: 12000px;
-    margin: 0 auto;
+   
+    margin: 0 auto; /* This centers the grid */
+    
+     width: 100%;
+    
+    /* ... other styles */
+
     border: 1px solid var(--border-color);
 }
 
@@ -37,6 +38,7 @@
 
 /* Styling for the individual feature items inside the grid */
 .feature-item {
+    
     display: flex;
     flex-direction: column;
     padding: 2.5rem 0;
@@ -124,7 +126,6 @@
     border-bottom-right-radius: 9999px;
     background-color: var(--secondary-color);
     transition: all 0.2s ease-in-out;
-    origin: center;
 }
 
 .feature-title {

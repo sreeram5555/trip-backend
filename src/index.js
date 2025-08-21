@@ -1,17 +1,37 @@
+// import React from 'react';
+// import ReactDOM from 'react-dom/client';
+// import App from './App';
+// import { BrowserRouter as Router } from 'react-router-dom'; // Import Router here
+// import { AuthProvider } from './context/AuthContext';
+// import './App.css';
+
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(
+//   <React.StrictMode>
+//     {/* 1. AuthProvider is now the outermost wrapper */}
+//     <AuthProvider>
+//       {/* 2. The Router wraps the App, ensuring all routes have auth context */}
+//       <Router>
+//         <App />
+//       </Router>
+//     </AuthProvider>
+//   </React.StrictMode>
+// );
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import './App.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <AuthProvider>
+      <Router>
+        <App />
+      </Router>
+    </AuthProvider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

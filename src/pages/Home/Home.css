@@ -1,25 +1,12 @@
 .home-page-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    background-color: var(--background-color);
 }
-
 .home-page-container main {
-    flex-grow: 1;
-    /* This allows the child .content-wrapper to be positioned relative to it */
-    position: relative; 
+    position: relative;
 }
-
-/* This wrapper holds all the content that scrolls up */
 .content-wrapper {
-    /* Ensures it sits on top of the sticky hero section */
     position: relative;
     z-index: 2;
-    width: 100%;
-
-    /* Gives it an opaque background to hide the hero as it scrolls */
     background-color: var(--background-color);
-
-    /* Adds a subtle line at the top to cleanly separate it from the hero */
     border-top: 1px solid var(--border-color);
 }

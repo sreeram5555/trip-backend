@@ -4,20 +4,17 @@
 */
 
 :root {
-  --background-color: #020617; /* Deep navy blue */
-  --background-light: #0f172a; /* Lighter navy for cards */
-  --border-color: rgba(45, 212, 191, 0.2); /* Teal border with low opacity */
-  --primary-color: #f8fafc; /* Off-white for primary text */
-  --secondary-color: #94a3b8; /* Slate gray for secondary text */
-  --accent-color: #2dd4bf; /* Bright Teal for accents and buttons */
-  --accent-hover: #5eead4; /* Lighter teal for hover */
-  --glow-color-1: rgba(45, 212, 191, 0.5); /* Teal glow */
-  --glow-color-2: rgba(124, 58, 237, 0.4); /* Purple glow */
+  --background-color: #020617;
+  --background-light: #0f172a;
+  --border-color: rgba(45, 212, 191, 0.2);
+  --primary-color: #f8fafc;
+  --secondary-color: #94a3b8;
+  --accent-color: #2dd4bf;
+  --accent-hover: #5eead4;
 }
 
 body {
   margin: 0;
-  /* Use the new font */
   font-family: 'Satoshi', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -28,12 +25,31 @@ body {
 
 .App {
   min-height: 100vh;
-  position: relative; /* Required for the animated background */
 }
 
-/* Helper class for section structure */
-.section-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
+.page-container {
+    padding: 120px 2rem 4rem;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.error-message {
+  color: #ff4d4d;
+  margin-top: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.form-submit-btn {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 500;
+    cursor: pointer;
 }

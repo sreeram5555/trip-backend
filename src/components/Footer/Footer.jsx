@@ -1,7 +1,6 @@
 import React from 'react';
 import './Footer.css';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/logo.svg';
 
 const Footer = () => {
     return (
@@ -10,7 +9,6 @@ const Footer = () => {
                 <div className="footer-top">
                     <div className="footer-branding">
                         <Link to="/" className="footer-logo">
-                            <img src={logo} alt="RoamAI Logo" />
                             <span>RoamAI</span>
                         </Link>
                         <p className="footer-tagline">Your AI-powered guide to India.</p>
@@ -24,13 +22,6 @@ const Footer = () => {
                             </ul>
                         </div>
                         <div className="footer-links">
-                            <h4>Company</h4>
-                            <ul>
-                                <li><a href="#about">About Us</a></li>
-                                <li><a href="#contact">Contact</a></li>
-                            </ul>
-                        </div>
-                        <div className="footer-links">
                             <h4>Legal</h4>
                             <ul>
                                 <li><a href="#privacy">Privacy Policy</a></li>
@@ -41,10 +32,6 @@ const Footer = () => {
                 </div>
                 <div className="footer-bottom">
                     <p>&copy; {new Date().getFullYear()} RoamAI. All rights reserved.</p>
-                    <div className="footer-socials">
-                        {/* Add social media links here if you want */}
-                        {/* <a href="#">Twitter</a> <a href="#">GitHub</a> */}
-                    </div>
                 </div>
             </div>
         </footer>

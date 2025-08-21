@@ -11,7 +11,6 @@ import {
     IconUsersGroup,
 } from "@tabler/icons-react";
 
-// Data for the feature cards remains the same.
 const features = [
     {
         title: "AI-Powered Discovery",
@@ -73,8 +72,8 @@ const Feature = ({ title, description, icon, index }) => {
 const Features = () => {
     return (
         // --- THIS IS THE STRUCTURAL FIX ---
-        // 1. The outer section is full-width and provides padding.
-        <section className="features-section-container">
+        // 1. The outer section is full-width and provides the padding.
+        <section id="features" className="features-section-container">
             {/* 2. The inner div is the centered grid with the border. */}
             <div className="features-grid-wrapper">
                 {features.map((feature, index) => (

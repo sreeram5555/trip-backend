@@ -3,27 +3,17 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  /* width: 100vw; */
-  height: 100vh; /* This makes the section take up the full height of the viewport. */
+  height: 100vh;
   overflow: hidden;
-  
-  /* This is the key property that makes the section "stick" to the top
-     of the page as the user scrolls past it. */
   position: sticky;
   top: 0;
-
-  /* This padding positions the text content vertically and horizontally. */
   padding: 5rem 2rem;
 }
-
 .hero-content {
-  /* This ensures the text, subtitle, and button appear ON TOP of the
-     Vanta.js canvas that is injected into the .hero-section background. */
   position: relative;
   z-index: 1; 
   max-width: 800px;
 }
-
 .hero-headline {
   font-size: 5rem;
   font-weight: 700;
@@ -32,15 +22,12 @@
   margin-bottom: 2rem;
   letter-spacing: -2.5px;
 }
-
 .gradient-text {
   background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
 }
-
 .hero-subheadline {
   font-size: 1.25rem;
   color: var(--secondary-color);
@@ -48,7 +35,6 @@
   margin: 0 auto 3rem;
   line-height: 1.7;
 }
-
 .hero-cta-button {
   display: inline-block;
   font-size: 1.1rem;
@@ -61,7 +47,6 @@
   transition: all 0.3s ease;
   box-shadow: 0 0 20px rgba(45, 212, 191, 0.4);
 }
-
 .hero-cta-button:hover {
   transform: scale(1.05) translateY(-5px);
   box-shadow: 0 0 30px rgba(45, 212, 191, 0.6);
