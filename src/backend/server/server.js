@@ -58,6 +58,9 @@ app.use(cookieParser());
 //   credentials: true,                 // Allow cookies/tokens
 // }));
 
+app.use(cors({
+  origin: "*",    // allows any origin
+}));
 
 // --- Your routes below ---
 
