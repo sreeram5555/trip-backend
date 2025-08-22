@@ -16,8 +16,9 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000', // The origin of your React frontend
-  credentials: true // This is crucial for allowing cookies to be sent
+  origin: ["http://localhost:3000", "https://your-frontend-domain.com"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
 }));
 
 app.use(express.json());
