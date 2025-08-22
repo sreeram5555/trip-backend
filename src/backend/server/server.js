@@ -44,11 +44,12 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+
 // ✅ Replace * with your frontend origin
-app.use(cors({
-  origin: "*",
-  credentials: false, // must be false when using "*"
-}));
+  app.use(cors({
+    origin: "*",
+    credentials: false, // must be false when using "*"
+  }));
 
 
 // --- Your routes below ---
