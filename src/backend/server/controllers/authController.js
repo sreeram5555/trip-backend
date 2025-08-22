@@ -162,7 +162,7 @@ export const login = async (req, res) => {
 
     res.json({ success: true, token, message: `Logged in as ${user.email}` });
   } catch (err) {
-    res.status(500).json({ success: false, message: "Server error" });
+    res.status(500).json({ success: false, message: "Server error", error: err.message });
   }
 };
 
