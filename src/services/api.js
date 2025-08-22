@@ -7,7 +7,7 @@ import axios from 'axios';
 //     withCredentials: true,
 // });
 const authApiClient = axios.create({
-    baseURL: 'https://trip-project-2.onrender.com/api',
+    baseURL: 'https://trip-backend-zb25.onrender.com/',
     withCredentials: true,
 })
 
