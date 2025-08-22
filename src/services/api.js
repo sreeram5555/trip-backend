@@ -6,10 +6,14 @@ import axios from 'axios';
 //      baseURL: 'https://trip-project-2.onrender.com/',
 //     withCredentials: true,
 // });
+
 const authApiClient = axios.create({
-  baseURL: "https://trip-project-2.onrender.com/api",
-  withCredentials: true,
+  baseURL: "https://trip-backend-1-db3t.onrender.com/api", // your backend
+  withCredentials: true, // ✅ send/receive cookies
 });
+
+export default authApiClient;
+
 
 
 // --- Axios Instance for the Python ML Backend (Port 8000) ---
