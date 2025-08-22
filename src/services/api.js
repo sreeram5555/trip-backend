@@ -10,7 +10,7 @@ import axios from 'axios';
 
 
 const authApiClient = axios.create({
-  baseURL: "https://trip-backend-2-s1p9.onrender.com", // ✅ correct backend
+  baseURL: "https://trip-backend-2-s1p9.onrender.com/", // ✅ correct backend
   withCredentials: true,
 });
 
