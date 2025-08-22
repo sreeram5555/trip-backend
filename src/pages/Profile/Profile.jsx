@@ -122,9 +122,10 @@ const Profile = () => {
                                             <div 
                                                 className="card-image-preview" 
                                                 style={{
-                                                    backgroundImage: previewImage 
-                                                        ? `url('${previewImage}')` 
-                                                        : 'linear-gradient(135deg, var(--background-light), var(--background-color))'
+                                                   backgroundImage: previewImage 
+                                                    ? `url(${previewImage})` 
+                                                    : 'linear-gradient(135deg, var(--background-light), var(--background-color))'
+
                                                 }} 
                                             />
                                             <div className="card-content-overlay">
