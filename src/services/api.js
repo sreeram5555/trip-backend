@@ -11,6 +11,7 @@ import axios from 'axios';
 
 const authApiClient = axios.create({
   baseURL: "https://trip-backend-2-s1p9.onrender.com/", // ✅ correct backend
+// baseURL:"http://localhost:5000/",
   withCredentials: true,
 });
 
