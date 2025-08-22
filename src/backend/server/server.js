@@ -38,18 +38,25 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/authRoutes.js";
+import connectDB from "./config/db.js";  
 
 const app = express();
 
+connectDB();
 app.use(express.json());
 app.use(cookieParser());
 
 
 // ✅ Replace * with your frontend origin
-app.use(cors({
-  origin: 'https://trip-planner-frontend-rohf.onrender.com', // The ONLY origin you trust
-  credentials: true,                             // Allow cookies/tokens
-}));
+// app.use(cors({
+//   // origin: 'https://trip-planner-frontend-rohf.onrender.com', // The ONLY origin you trust
+//   origin:"http://localhost:5000/",
+//   credentials: true,                             // Allow cookies/tokens
+// }));
+// app.use(cors({
+//   origin: "http://localhost:3000",  // Your frontend
+//   credentials: true,                 // Allow cookies/tokens
+// }));
 
 
 // --- Your routes below ---
