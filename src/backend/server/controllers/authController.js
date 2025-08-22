@@ -13,12 +13,18 @@ const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString()
 const signToken = (payload, expiresIn = "7d") =>
   jwt.sign(payload, process.env.JWT_SECRET, { expiresIn });
 const setAuthCookie = (res, token) => {
+  // res.cookie("token", token, {
+  //   httpOnly: true,
+  //   secure: process.env.NODE_ENV === "production",
+  //   sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  //   maxAge: 7 * 24 * 60 * 60 * 1000,
+  // });
+
   res.cookie("token", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-  });
+  httpOnly: true,
+  secure: true,       // must be true in production (HTTPS)
+  sameSite: "none"    // required for cross-site
+});
 };
 const getTokenFromReq = (req) => {
   if (req.cookies?.token) return req.cookies.token;
