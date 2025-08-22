@@ -16,7 +16,7 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: ["http://localhost:3000", "trip-project-ma1k.vercel.app"],
+  origin: ["http://localhost:3000", "https://trip-project-ma1k.vercel.app"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
