@@ -44,13 +44,10 @@ import authRoutes from "./routes/authRoutes.js";
 dotenv.config();
 const app = express();
 
-// ✅ CORS setup
+// ✅ Temporary CORS setup (open for all)
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000", 
-      "https://trip-project-ma1k.vercel.app" // your Vercel frontend
-    ],
+    origin: "*",  // allow requests from anywhere
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
