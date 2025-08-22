@@ -47,7 +47,7 @@ app.use(cookieParser());
 
 // ✅ Replace * with your frontend origin
 app.use(cors({
-  origin: 'https://trip-project-ma1k.vercel.app', // The ONLY origin you trust
+  origin: 'https://trip-project-ma1k.vercel.app/**', // The ONLY origin you trust
   credentials: true,                             // Allow cookies/tokens
 }));
 
