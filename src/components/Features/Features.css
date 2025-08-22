@@ -1,8 +1,8 @@
 .features-section-container {
     width: 100%;
-    padding: 6rem 2rem;
     box-sizing: border-box;
 }
+
 
 /* 
   This is the inner wrapper for the grid.
@@ -38,7 +38,7 @@
 
 /* Styling for the individual feature items inside the grid */
 .feature-item {
-    
+  
     display: flex;
     flex-direction: column;
     padding: 2.5rem 0;

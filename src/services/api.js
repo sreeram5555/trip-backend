@@ -1,14 +1,20 @@
 import axios from 'axios';
 
 // --- Axios Instance for the Node.js Auth/Data Backend (Port 5000) ---
+// const authApiClient = axios.create({
+//     // baseURL: 'http://localhost:5000/api',
+//      baseURL: 'https://trip-project-2.onrender.com/',
+//     withCredentials: true,
+// });
 const authApiClient = axios.create({
-    baseURL: 'http://localhost:5000/api',
+    baseURL: 'https://trip-project-2.onrender.com/api',
     withCredentials: true,
-});
+})
 
 // --- Axios Instance for the Python ML Backend (Port 8000) ---
 const mlApiClient = axios.create({
-    baseURL: 'http://localhost:8000',
+    // baseURL: 'http://localhost:8000',
+    baseURL: 'https://travelagent-agentic-ai.onrender.com',
 });
 
 // ===================================================================
