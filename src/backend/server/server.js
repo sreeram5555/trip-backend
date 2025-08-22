@@ -44,34 +44,31 @@ import authRoutes from "./routes/authRoutes.js";
 dotenv.config();
 const app = express();
 
-// ✅ CORS Config (allow frontend + localhost)
+// ✅ CORS setup
 app.use(
   cors({
     origin: [
-      "http://localhost:3000",        // Local dev
-      "https://trip-project-ma1k.vercel.app" // Vercel frontend
+      "http://localhost:3000", 
+      "https://trip-project-ma1k.vercel.app" // your Vercel frontend
     ],
+    credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true, // ✅ allows cookies/token to be sent
   })
 );
 
-// ✅ Middleware
 app.use(express.json());
 app.use(cookieParser());
 
 // ✅ Routes
 app.use("/api/auth", authRoutes);
 
-// ✅ Health check route
+// ✅ Test route
 app.get("/", (req, res) => {
-  res.send("✅ Backend is running and connected to frontend!");
+  res.json({ success: true, message: "Backend is running 🎉" });
 });
 
-// ✅ Start server after DB connects
+// ✅ Start server
 const PORT = process.env.PORT || 5000;
 connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-  });
+  app.listen(PORT, () => console.log(`🚀 Server running on ${PORT}`));
 });

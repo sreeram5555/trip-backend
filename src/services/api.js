@@ -7,10 +7,15 @@ import axios from 'axios';
 //     withCredentials: true,
 // });
 
+
+
 const authApiClient = axios.create({
-  baseURL: "https://trip-backend-1-db3t.onrender.com/api", // your backend
-  withCredentials: true, // ✅ send/receive cookies
+  baseURL: "https://trip-backend-1-db3t.onrender.com/api", // ✅ correct backend
+  withCredentials: true,
 });
+
+
+
 
 export default authApiClient;
 
