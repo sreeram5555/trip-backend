@@ -27,6 +27,14 @@ const mlApiClient = axios.create({
     baseURL: 'https://travelagent-agentic-ai.onrender.com',
 });
 
+const config = {
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+  }
+};
+
+
 // ===================================================================
 // AUTH & DATA API (Node.js @ Port 5000)
 // ===================================================================
@@ -37,7 +45,7 @@ const mlApiClient = axios.create({
 // ===================================================================
 export const authApi = {
     // Auth endpoints are unchanged
-    register: (userData) => authApiClient.post('/api/auth/register', userData),
+    register: (userData) => authApiClient.post('/api/auth/register', config, userData, ),
     verifyEmail: (data) => authApiClient.post('/api/auth/verify-email', data),
     resendOtp: (data) => authApiClient.post('/api/auth/resend-otp', data),
     login: (credentials) => authApiClient.post('/api/auth/login', credentials),
