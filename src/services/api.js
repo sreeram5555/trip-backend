@@ -10,7 +10,7 @@ import axios from 'axios';
 
 
 const authApiClient = axios.create({
-  baseURL: "https://trip-backend-2-s1p9.onrender.com/api", // ✅ correct backend
+  baseURL: "https://trip-backend-2-s1p9.onrender.com/", // ✅ correct backend
   withCredentials: true,
 });
 
@@ -37,16 +37,16 @@ const mlApiClient = axios.create({
 // ===================================================================
 export const authApi = {
     // Auth endpoints are unchanged
-    register: (userData) => authApiClient.post('/auth/register', userData),
-    verifyEmail: (data) => authApiClient.post('/auth/verify-email', data),
-    resendOtp: (data) => authApiClient.post('/auth/resend-otp', data),
-    login: (credentials) => authApiClient.post('/auth/login', credentials),
-    logout: () => authApiClient.post('/auth/logout'),
-    getMe: () => authApiClient.get('/auth/me'),
+    register: (userData) => authApiClient.post('/api/auth/register', userData),
+    verifyEmail: (data) => authApiClient.post('/api/auth/verify-email', data),
+    resendOtp: (data) => authApiClient.post('/api/auth/resend-otp', data),
+    login: (credentials) => authApiClient.post('/api/auth/login', credentials),
+    logout: () => authApiClient.post('/api/auth/logout'),
+    getMe: () => authApiClient.get('/api/auth/me'),
 
     // --- NEW, SIMPLIFIED ADVENTURE ENDPOINTS ---
-    saveAdventure: (tripPlan) => authApiClient.post('/adventure/save', { tripPlan }),
-    getMyAdventures: () => authApiClient.get('/adventure/my'),
+    saveAdventure: (tripPlan) => authApiClient.post('/api/adventure/save', { tripPlan }),
+    getMyAdventures: () => authApiClient.get('/api/adventure/my'),
 };
 
 // ===================================================================
