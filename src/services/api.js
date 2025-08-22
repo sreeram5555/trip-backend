@@ -7,9 +7,10 @@ import axios from 'axios';
 //     withCredentials: true,
 // });
 const authApiClient = axios.create({
-    baseURL: 'https://trip-backend-zb25.onrender.com/api',
-    withCredentials: true,
+  baseURL: "https://trip-project-2.onrender.com/api",
+  withCredentials: true,
 });
+
 
 // --- Axios Instance for the Python ML Backend (Port 8000) ---
 const mlApiClient = axios.create({
