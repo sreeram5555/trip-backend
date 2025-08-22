@@ -59,7 +59,8 @@ app.use(cookieParser());
 // }));
 
 app.use(cors({
-  origin: "*",    // allows any origin
+  origin: "https://trip-planner-frontend-rohf.onrender.com", // frontend URL
+  credentials: true,   // allow cookies/auth headers
 }));
 
 // --- Your routes below ---
