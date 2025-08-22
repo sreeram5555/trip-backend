@@ -44,18 +44,28 @@ const config = {
 // ===================================================================
 // AUTH & DATA API (Node.js @ Port 5000)
 // ===================================================================
-export const authApi = {
-    // Auth endpoints are unchanged
-    register: (userData) => authApiClient.post('/api/auth/register', config, userData, ),
-    verifyEmail: (data) => authApiClient.post('/api/auth/verify-email', data),
-    resendOtp: (data) => authApiClient.post('/api/auth/resend-otp', data),
-    login: (credentials) => authApiClient.post('/api/auth/login', credentials),
-    logout: () => authApiClient.post('/api/auth/logout'),
-    getMe: () => authApiClient.get('/api/auth/me'),
+// export const authApi = {
+//     // Auth endpoints are unchanged
+//     register: (userData) => authApiClient.post('/api/auth/register', userData, config),
+//     verifyEmail: (data) => authApiClient.post('/api/auth/verify-email', data),
+//     resendOtp: (data) => authApiClient.post('/api/auth/resend-otp', data),
+//     login: (credentials) => authApiClient.post('/api/auth/login', credentials),
+//     logout: () => authApiClient.post('/api/auth/logout'),
+//     getMe: () => authApiClient.get('/api/auth/me'),
 
-    // --- NEW, SIMPLIFIED ADVENTURE ENDPOINTS ---
-    saveAdventure: (tripPlan) => authApiClient.post('/api/adventure/save', { tripPlan }),
-    getMyAdventures: () => authApiClient.get('/api/adventure/my'),
+//     // --- NEW, SIMPLIFIED ADVENTURE ENDPOINTS ---
+//     saveAdventure: (tripPlan) => authApiClient.post('/api/adventure/save', { tripPlan }),
+//     getMyAdventures: () => authApiClient.get('/api/adventure/my'),
+// };
+export const authApi = {
+  register: (userData) => authApiClient.post('/api/auth/register', userData),
+  verifyEmail: (data) => authApiClient.post('/api/auth/verify-email', data),
+  resendOtp: (data) => authApiClient.post('/api/auth/resend-otp', data),
+  login: (credentials) => authApiClient.post('/api/auth/login', credentials),
+  logout: () => authApiClient.post('/api/auth/logout'),
+  getMe: () => authApiClient.get('/api/auth/me'),
+  saveAdventure: (tripPlan) => authApiClient.post('/api/adventure/save', { tripPlan }),
+  getMyAdventures: () => authApiClient.get('/api/adventure/my'),
 };
 
 // ===================================================================
