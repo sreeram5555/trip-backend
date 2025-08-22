@@ -73,6 +73,7 @@ app.use(cors({
 
 // --- Routes ---
 app.use("/api/auth", authRoutes);
+app.use("/api/adventure", adventureRoutes);
 
 // Default route to check backend status
 app.get("/", (req, res) => {
