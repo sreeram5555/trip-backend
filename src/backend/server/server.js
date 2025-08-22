@@ -52,7 +52,7 @@ app.use(cookieParser());
 
 app.use(function(req, res, next) {
       res.header("Access-Control-Allow-Origin", "*");
-      const allowedOrigins = ['http://localhost:3002', 'https://trip-planner-frontend-rohf.onrender.com'];
+      const allowedOrigins = ['http://localhost:3002', 'https://trip-planner-frontend-rohf.onrender.com', 'https://trip-backend-3-j3gg.onrender.com/'];
       const origin = req.headers.origin;
       if (allowedOrigins.includes(origin)) {
            res.setHeader('Access-Control-Allow-Origin', origin);
@@ -65,7 +65,7 @@ app.use(function(req, res, next) {
    
 app.use(cors({
   // origin: "https://trip-planner-frontend-rohf.onrender.com", // frontend URL
-  origin:["http://localhost:3002", "https://trip-planner-frontend-rohf.onrender.com"],
+  origin:["http://localhost:3002", "https://trip-planner-frontend-rohf.onrender.com", "https://trip-backend-3-j3gg.onrender.com"],
   credentials: true, // allow cookies/auth headers
 }));
 
