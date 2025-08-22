@@ -34,6 +34,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";  
 import authRoutes from "./routes/authRoutes.js";
+import adventureRoutes from "./routes/adventureRoutes.js"; 
 
 const app = express();
 
