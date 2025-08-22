@@ -37,6 +37,7 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import authRoutes from "./routes/authRoutes.js";
 
 const app = express();
 
@@ -45,12 +46,13 @@ app.use(cookieParser());
 
 // ✅ Replace * with your frontend origin
 app.use(cors({
-  origin: "https://trip-project-ma1k.vercel.app",
-  credentials: true,
+  origin: "*",
+  credentials: false, // must be false when using "*"
 }));
 
+
 // --- Your routes below ---
-import authRoutes from "./routes/authRoutes.js";
+
 app.use("/api/auth", authRoutes);
 
 app.get("/", (req, res) => {
