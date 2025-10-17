@@ -14,7 +14,7 @@ import userAuth from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/register", register);
+router.post('/signup', register);
 router.post("/verify-email", verifyEmail);
 router.post("/resend-otp", resendOtp);
 router.post("/login", login);
