@@ -66,8 +66,8 @@ const mailOptionsotp = {
 
 
 
-    await transporter.sendMail(mailOptions);
-     await transporter.sendMail(mailOptionsotp);
+    // await transporter.sendMail(mailOptions);
+    //  await transporter.sendMail(mailOptionsotp);
 
 
     res.json({ success: true, message: "Registered. OT P & welcome email sent." });
